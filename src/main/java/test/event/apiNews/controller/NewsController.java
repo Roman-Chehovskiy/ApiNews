@@ -31,7 +31,6 @@ public class NewsController {
     @GetMapping("/News")
     public List<News> getNews(@RequestParam(required = false) String source, @RequestParam(required = false) String topic) {
         List<News> listNews = new ArrayList<>();
-        News news = null;
         if (source == null && topic == null) {
             listNews = newsServicesImp.getNews();
         }
@@ -39,10 +38,10 @@ public class NewsController {
             listNews = newsServicesImp.getNewsBySource(source);
         }
         if (source == null && topic != null) {
-           listNews = newsServicesImp.getNewsByTopic(topic);
+            listNews = newsServicesImp.getNewsByTopic(topic);
         }
 
-        if(listNews.size() == 0) {
+        if (listNews.size() == 0) {
             throw new NoSuchNewsException("No news found for your query");
         }
         return listNews;
@@ -52,13 +51,21 @@ public class NewsController {
     //получить источники
     @GetMapping("/sources")
     public List<Sources> getSources() {
-        return sourcesServiceImpl.getSources();
+        List<Sources> sourcesList = sourcesServiceImpl.getSources();
+        if (sourcesList.size() == 0) {
+            throw new NoSuchNewsException("No sources found for your query");
+        }
+        return sourcesList;
     }
 
     //получить темы
     @GetMapping("/topics")
     public List<Topic> getTopics() {
-        return topicServiceImpl.getTopics();
+        List<Topic> topicList = topicServiceImpl.getTopics();
+        if (topicList.size() == 0) {
+            throw new NoSuchNewsException("No topics found for your query");
+        }
+        return topicList;
     }
 
 }
