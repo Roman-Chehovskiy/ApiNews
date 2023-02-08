@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.List;
 
 //сущность для таблицы с темами новостей
 @Entity
@@ -14,6 +15,7 @@ public class Topic {
     private Long idSource;
     @Expose
     private String topic;
+
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -43,6 +45,12 @@ public class Topic {
     public void setTopic(String topic) {
         this.topic = topic;
     }
+
+
+
+
+
+
 
 
 }

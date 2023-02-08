@@ -1,14 +1,15 @@
-package test.event.apiNews.services.find;
+package test.event.apiNews.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import test.event.apiNews.entity.Sources;
 import test.event.apiNews.repository.SourceRepository;
+import test.event.apiNews.services.SourcesService;
 
 import java.util.List;
 
 @Service
-public class FindSources {
+public class SourcesServiceImpl implements SourcesService {
 
     @Autowired
     private SourceRepository sourceRepository;

@@ -8,6 +8,4 @@ import java.util.List;
 
 @Repository
 public interface SourceRepository extends JpaRepository<Sources, Long> {
-    // запрос для получения всех источников
-    List<Sources> findAll();
 }

@@ -1,4 +1,4 @@
-package test.event.apiNews.services.unloading;
+package test.event.apiNews.unloading;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

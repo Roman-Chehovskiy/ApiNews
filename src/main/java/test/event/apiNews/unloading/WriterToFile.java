@@ -1,12 +1,12 @@
-package test.event.apiNews.services.unloading;
+package test.event.apiNews.unloading;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import test.event.apiNews.dto.DtoWriter;
-import test.event.apiNews.entity.NewsAll;
+import test.event.apiNews.entity.News;
 import test.event.apiNews.entity.Sources;
-import test.event.apiNews.services.find.FindNews;
-import test.event.apiNews.services.find.FindSources;
+import test.event.apiNews.services.impl.NewsServicesImp;
+import test.event.apiNews.services.impl.SourcesServiceImpl;
 
 import java.io.*;
 import java.util.List;
@@ -16,13 +16,13 @@ import java.util.List;
 public class WriterToFile {
 
 
-    FindSources findSources;
-    FindNews findNews;
+    SourcesServiceImpl sourcesServiceImpl;
+    NewsServicesImp newsServicesImp;
 
     @Autowired
-    public WriterToFile(FindSources findSources, FindNews findNews) {
-        this.findSources = findSources;
-        this.findNews = findNews;
+    public WriterToFile(SourcesServiceImpl sourcesServiceImpl, NewsServicesImp newsServicesImp) {
+        this.sourcesServiceImpl = sourcesServiceImpl;
+        this.newsServicesImp = newsServicesImp;
     }
 
     public WriterToFile() {
@@ -30,7 +30,7 @@ public class WriterToFile {
 
     //получаем количество новостей по рессурсу и записываем в DtoWriter
     private DtoWriter getSourceAndCount(String source) {
-        List<NewsAll> newsAllList = findNews.getAllNewsBySource(source);
+        List<News> newsAllList = newsServicesImp.getNewsBySource(source);
         DtoWriter dtoWriter = new DtoWriter();
         dtoWriter.setSource(source);
         dtoWriter.setCountSource(newsAllList.size());
@@ -56,7 +56,7 @@ public class WriterToFile {
     }
 
     public void write() {
-        List<Sources> listSources = findSources.getSources();
+        List<Sources> listSources = sourcesServiceImpl.getSources();
         for (Sources source : listSources) {
             DtoWriter dtoWriter = getSourceAndCount(source.getSource());
             writeDtoToCsv(dtoWriter);

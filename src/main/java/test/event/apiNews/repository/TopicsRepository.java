@@ -9,7 +9,4 @@ import java.util.List;
 @Repository
 public interface TopicsRepository extends JpaRepository<Topic, Long> {
 
-    //запрос для получения всех тем
-    List<Topic> findAll();
-
 }

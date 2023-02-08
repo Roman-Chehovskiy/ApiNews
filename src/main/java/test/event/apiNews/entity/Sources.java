@@ -14,7 +14,6 @@ public class Sources {
     private Long id;
     @Expose
     private String source;
-    private List<Topic> topicList;
 
     @Id
     @GeneratedValue(generator = "increment")
@@ -36,12 +35,4 @@ public class Sources {
         this.source = source;
     }
 
-    @OneToMany(targetEntity = Topic.class)
-    public List<Topic> getTopicList() {
-        return topicList;
-    }
-
-    public void setTopicList(List<Topic> topicList) {
-        this.topicList = topicList;
-    }
 }
